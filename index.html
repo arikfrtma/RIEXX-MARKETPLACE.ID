@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RIEXX MARKETPLACE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #10b981;
+            --dark: #1f2937;
+            --light: #f9fafb;
+            --gray: #6b7280;
+            --accent: #8b5cf6;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border-radius: 16px;
+            padding: 25px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.15);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            transform: rotate(30deg);
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 10px;
+            position: relative;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* Navigation Menu */
+        .nav-container {
+            background: white;
+            border-radius: 16px;
+            padding: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: center;
+        }
+
+        .category-menu {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .category-btn {
+            padding: 12px 20px;
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .category-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .category-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .product-header {
+            padding: 20px;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            color: var(--dark);
+            font-size: 1.3rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .product-body {
+            padding: 20px;
+            flex-grow: 1;
+        }
+
+        .product-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .product-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .product-price {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .buy-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .buy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: white;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            position: relative;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #f1f5f9;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: #e5e7eb;
+            transform: rotate(90deg);
+        }
+
+        .modal-title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--dark);
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+
+        .modal-content {
+            text-align: center;
+        }
+
+        .bank-info {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: left;
+            border: 1px solid #e2e8f0;
+        }
+
+        .bank-info p {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .bank-details {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .bank-icon {
+            width: 24px;
+            text-align: center;
+            color: var(--primary);
+        }
+
+        .upload-area {
+            border: 2px dashed #cbd5e1;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            margin: 20px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .upload-area:hover {
+            border-color: var(--primary);
+            background: #f8fafc;
+        }
+
+        .upload-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        #file-name {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .submit-btn:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            background: var(--success);
+            color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            z-index: 1100;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .notification.error {
+            background: var(--danger);
+        }
+
+        .notification.warning {
+            background: var(--warning);
+        }
+
+        /* Welcome Modal */
+        .welcome-modal .modal {
+            text-align: center;
+            max-width: 450px;
+        }
+
+        .welcome-icon {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .welcome-text {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--gray);
+        }
+
+        .ok-btn {
+            padding: 12px 30px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .ok-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        /* WhatsApp Button */
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 20px;
+            background: #25d366;
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        /* Login Modal */
+        .login-modal .modal {
+            max-width: 400px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .form-footer {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .form-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-top: 40px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .footer-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .footer-section p, .footer-section a {
+            margin-bottom: 10px;
+            display: block;
+            color: var(--gray);
+            text-decoration: none;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: #f3f4f6;
+            border-radius: 50%;
+            color: var(--dark);
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            padding-top: 20px;
+            border-top: 1px solid #e5e7eb;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            
+            header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .category-menu {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .category-btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .social-icons {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .modal {
+                padding: 20px;
+            }
+            
+            .product-header {
+                padding: 15px;
+                font-size: 1.1rem;
+            }
+            
+            header {
+                padding: 20px;
+            }
+            
+            header h1 {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .product-card {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        /* Main Content */
+        #main-content {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Modal (Default Active) -->
+    <div class="modal-overlay login-modal active">
+        <div class="modal">
+            <div class="modal-content">
+                <div class="welcome-icon">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <h2 class="modal-title">Login ke RIEXX MARKETPLACE</h2>
+                
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="Masukkan email Anda" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" placeholder="Masukkan password Anda" required>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                    
+                    <div class="form-footer">
+                        Belum punya akun? <a href="#" id="show-register">Daftar di sini</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal-overlay register-modal">
+        <div class="modal">
+            <button class="modal-close">&times;</button>
+            <div class="modal-content">
+                <div class="welcome-icon">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <h2 class="modal-title">Daftar Akun Baru</h2>
+                
+                <form id="register-form">
+                    <div class="form-group">
+                        <label for="reg-name">Nama Lengkap</label>
+                        <input type="text" id="reg-name" placeholder="Masukkan nama lengkap" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reg-email">Email</label>
+                        <input type="email" id="reg-email" placeholder="Masukkan email Anda" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reg-password">Password</label>
+                        <input type="password" id="reg-password" placeholder="Buat password minimal 6 karakter" required minlength="6">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reg-confirm">Konfirmasi Password</label>
+                        <input type="password" id="reg-confirm" placeholder="Konfirmasi password Anda" required>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-user-plus"></i> Daftar
+                    </button>
+                    
+                    <div class="form-footer">
+                        Sudah punya akun? <a href="#" id="show-login">Login di sini</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content (Hidden until login) -->
+    <div id="main-content">
+        <div class="container">
+            <header>
+                <h1>RIEXX MARKETPLACE</h1>
+                <p>Platform terpercaya untuk berbagai kebutuhan digital dan sosial media</p>
+            </header>
+            
+            <!-- Navigation Menu -->
+            <div class="nav-container">
+                <div class="category-menu">
+                    <button class="category-btn active" data-category="all">
+                        <i class="fas fa-grid"></i> Semua Produk
+                    </button>
+                    <button class="category-btn" data-category="panel">
+                        <i class="fas fa-server"></i> Panel
+                    </button>
+                    <button class="category-btn" data-category="followers">
+                        <i class="fas fa-users"></i> Followers
+                    </button>
+                    <button class="category-btn" data-category="tiktok">
+                        <i class="fab fa-tiktok"></i> TikTok
+                    </button>
+                    <button class="category-btn" data-category="instagram">
+                        <i class="fab fa-instagram"></i> Instagram
+                    </button>
+                    <button class="category-btn" data-category="script">
+                        <i class="fas fa-code"></i> Script
+                    </button>
+                    <button class="category-btn" data-category="other">
+                        <i class="fas fa-mobile-alt"></i> Lainnya
+                    </button>
+                </div>
+            </div>
+            
+            <div class="products-grid">
+                <!-- Panel Pterodactyl -->
+                <div class="product-card" data-category="panel">
+                    <div class="product-badge">POPULER</div>
+                    <div class="product-header">
+                        <i class="fas fa-server"></i> Panel Pterodactyl
+                    </div>
+                    <div class="product-body">
+                        <div class="product-item"><span>1GB</span><span class="product-price">Rp.2K/BULAN</span></div>
+                        <div class="product-item"><span>2GB</span><span class="product-price">Rp.3K/BULAN</span></div>
+                        <div class="product-item"><span>3GB</span><span class="product-price">Rp.4K/BULAN</span></div>
+                        <div class="product-item"><span>4GB</span><span class="product-price">Rp.5K/BULAN</span></div>
+                        <div class="product-item"><span>5GB</span><span class="product-price">Rp.6K/BULAN</span></div>
+                        <div class="product-item"><span>6GB</span><span class="product-price">Rp.7K/BULAN</span></div>
+                        <div class="product-item"><span>7GB</span><span class="product-price">Rp.8K/BULAN</span></div>
+                        <div class="product-item"><span>8GB</span><span class="product-price">Rp.9K/BULAN</span></div>
+                        <div class="product-item"><span>10GB</span><span class="product-price">Rp.10K/BULAN</span></div>
+                        <div class="product-item"><span>Unlimited</span><span class="product-price">Rp.15K/BULAN</span></div>
+                        <div class="product-item"><span>Admin Panel</span><span class="product-price">Rp.20K/BULAN</span></div>
+                        <button class="buy-btn" data-product="Panel Pterodactyl">BELI SEKARANG</button>
+                    </div>
+                </div>
+                
+                <!-- Followers All Sosmed -->
+                <div class="product-card" data-category="followers">
+                    <div class="product-header">
+                        <i class="fas fa-users"></i> Followers All Sosmed
+                    </div>
+                    <div class="product-body">
+                        <div class="product-item"><span>10 pengikut</span><span class="product-price">Rp.300p</span></div>
+                        <div class="product-item"><span>50 pengikut</span><span class="product-price">Rp.2K</span></div>
+                        <div class="product-item"><span>100 pengikut</span><span class="product-price">Rp.3K</span></div>
+                        <div class="product-item"><span>150 pengikut</span><span class="product-price">Rp.5K</span></div>
+                        <div class="product-item"><span>200 pengikut</span><span class="product-price">Rp.7K</span></div>
+                        <div class="product-item"><span>300 pengikut</span><span class="product-price">Rp.9K</span></div>
+                        <div class="product-item"><span>400 pengikut</span><span class="product-price">Rp.12K</span></div>
+                        <div class="product-item"><span>500 pengikut</span><span class="product-price">Rp.15K</span></div>
+                        <div class="product-item"><span>1000 pengikut</span><span class="product-price">Rp.35K</span></div>
+                        <button class="buy-btn" data-product="Followers All Sosmed">BELI SEKARANG</button>
+                    </div>
+                </div>
+                
+                <!-- TikTok Followers -->
+                <div class="product-card" data-category="tiktok">
+                    <div class="product-header">
+                        <i class="fab fa-tiktok"></i> TikTok Followers (Refill)
+                    </div>
+                    <div class="product-body">
+                        <div class="product-item"><span>10</span><span class="product-price">Rp.300p</span></div>
+                        <div class="product-item"><span>50</span><span class="product-price">Rp.3.400K</span></div>
+                        <div class="product-item"><span>100</span><span class="product-price">Rp.4.500K</span></div>
+                        <div class="product-item"><span>150</span><span class="product-price">Rp.6.200K</span></div>
+                        <div class="product-item"><span>200</span><span class="product-price">Rp.8K</span></div>
+                        <div class="product-item"><span>300</span><span class="product-price">Rp.10K</span></div>
+                        <div class="product-item"><span>400</span><span class="product-price">Rp.13K</span></div>
+                        <div class="product-item"><span>500</span><span class="product-price">Rp.16K</span></div>
+                        <div class="product-item"><span>1000</span><span class="product-price">Rp.40K</span></div>
+                        <button class="buy-btn" data-product="TikTok Followers">BELI SEKARANG</button>
+                    </div>
+                </div>
+                
+                <!-- TikTok Like -->
+                <div class="product-card" data-category="tiktok">
+                    <div class="product-header">
+                        <i class="fas fa-heart"></i> TikTok Like (Refill)
+                    </div>
+                    <div class="product-body">
+                        <div class="product-item"><span>10</span><span class="product-price">Rp.5p</span></div>
+                        <div class="product-item"><span>50</span><span class="product-price">Rp.1K</span></div>
+                        <div class="product-item"><span>100</span><span class="product-price">Rp.2K</span></div>
+                        <div class="product-item"><span>150</span><span class="product-price">Rp.3K</span></div>
+                        <div class="product-item"><span>200</span><span class="product-price">Rp.5K</span></div>
+                        <div class="product-item"><span>300</span><span class="product-price">Rp.6K</span></div>
+                        <div class="product-item"><span>400</span><span class="product-price">Rp.7K</span></div>
+                        <div class="product-item"><span>500</span><span class="product-price">Rp.9K</span></div>
+                        <div class="product-item"><span>1000</span><span class="product-price">Rp.25K</span></div>
+                        <button class="buy-btn" data-product="TikTok Like">BELI SEKARANG</button>
+                    </div>
+                </div>
+                
+                <!-- Instagram Followers -->
+                <div class="product-card" data-category="instagram">
+                    <div class="product-badge">TRENDING</div>
+                    <div class="product-header">
+                        <i class="fab fa-instagram"></i> Instagram Followers (Refill)
+                    </div>
+                    <div class="product-body">
+                        <div class="product-item"><span>10</span><span class="product-price">Rp.2K</span></div>
+                        <div class="product-item"><span>50</span><span class="product-price">Rp.8K</span></div>
+                        <div class="product-item"><span>100</span><span class="product-price">Rp.13K</span></div>
+                        <div class="product-item"><span>150</span><span class="product-price">Rp.15K</span></div>
+                        <div class="product-item"><span>200</span><span class="product-price">Rp.17K</span></div>
+                        <div class="product-item"><span>300</span><span class="product-price">Rp.19K</span></div>
+                        <div class="product-item"><span>400</span><span class="product-price">Rp.25K</span></div>
+                        <div class="product-item"><span>500</span><span class="product-price">Rp.30K</span></div>
+                        <div class="product-item"><span>1000</span><span class="product-price">Rp.60K</span></div>
+                        <button class="buy-btn" data-product="Instagram Followers">BELI SEKARANG</button>
+                    </div>
+                </div>
+                
+                <!-- Instagram Like -->
+                <div class="product-card" data-category="instagram">
+                    <div class="product-header">
+                        <i class="fas fa-thumbs-up"></i> Instagram Like
+                    </div>
+                    <div class="product-body">
+                        <div class="product-item"><span>Harga</span><span class="product-price">-</span></div>
+                        <button class="buy-btn" data-product="Instagram Like">BELI SEKARANG</button>
+                    </div>
+                </div>
+                
+                <!-- Script Products -->
+                <div class="product-card" data-category="script">
+                    <div class="product-badge">BARU</div>
+                    <div class="product-header">
+                        <i class="fas fa-code"></i> RiexxDCodeX Crasher V2
+                    </div>
+                    <div class="product-body">
+                        <div class="product-item"><span>Version WhatsApp</span><span class="product-price">Rp.20k</span></div>
+                        <div class="product-item"><span>No Upp</span><span class="product-price">Rp.30k</span></div>
+                        <div class="product-item"><span>Free Up</span><span class="product-price">Gratis</span></div>
+                        <button class="buy-btn" data-product="RiexxDCodeX Crasher V2">BELI SEKARANG</button>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="script">
+                    <div class="product-header">
+                        <i class="fas fa-code"></i> RiexxDCodeX - MD V1
+                    </div>
+                    <div class="product-body">
+                        <div class="product-item"><span>Full Version</span><span class="product-price">Rp.15k</span></div>
+                        <button class="buy-btn" data-product="RiexxDCodeX - MD V1">BELI SEKARANG</button>
+                    </div>
+                </div>
+                
+                <!-- Nomor Kosong / Nokos -->
+                <div class="product-card" data-category="other">
+                    <div class="product-header">
+                        <i class="fas fa-mobile-alt"></i> Nomor Kosong / Nokos
+                    </div>
+                    <div class="product-body">
+                        <div class="product-item"><span>Indonesia 🇮🇩</span><span class="product-price">Rp.5K</span></div>
+                        <div class="product-item"><span>Filipina 🇵🇭</span><span class="product-price">Rp.7K</span></div>
+                        <div class="product-item"><span>Rusia 🇷🇺</span><span class="product-price">Rp.17K</span></div>
+                        <div class="product-item"><span>Ukraina 🇺🇦</span><span class="product-price">Rp.15K</span></div>
+                        <div class="product-item"><span>Malaysia 🇲🇾</span><span class="product-price">Rp.12K</span></div>
+                        <div class="product-item"><span>Vietnam 🇻🇳</span><span class="product-price">Rp.10K</span></div>
+                        <div class="product-item"><span>England 🏴</span><span class="product-price">Rp.14K</span></div>
+                        <button class="buy-btn" data-product="Nomor Kosong / Nokos">BELI SEKARANG</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer>
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3>Kontak Owner</h3>
+                        <p><i class="fab fa-whatsapp"></i> WhatsApp: 6283898472764</p>
+                        <p><i class="fab fa-whatsapp"></i> WhatsApp2: 6283179572446</p>
+                        <p><i class="fab fa-youtube"></i> YouTube: RiexxDevOfficial</p>
+                        <p><i class="fab fa-telegram"></i> Telegram: RiexOfficial</p>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h3>Layanan Kami</h3>
+                        <a href="#">Panel Pterodactyl</a>
+                        <a href="#">Followers Sosmed</a>
+                        <a href="#">Layanan TikTok</a>
+                        <a href="#">Layanan Instagram</a>
+                        <a href="#">Script & Tools</a>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h3>Ikuti Kami</h3>
+                        <p>Jangan lupa follow media sosial kami untuk update terbaru</p>
+                        <div class="social-icons">
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                            <a href="#"><i class="fab fa-telegram"></i></a>
+                            <a href="#"><i class="fab fa-whatsapp"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="copyright">
+                    <p>©2025 - RiexxDCodeX | All Rights Reserved</p>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div class="modal-overlay payment-modal">
+        <div class="modal">
+            <button class="modal-close">&times;</button>
+            <h2 class="modal-title">Pembayaran</h2>
+            <div class="modal-content">
+                <p>Silahkan transfer ke rekening BRI berikut dan kirim bukti pembayaran:</p>
+                
+                <div class="bank-info">
+                    <p><i class="fas fa-university bank-icon"></i><strong>Bank:</strong> <span class="bank-details">BRI (Bank Rakyat Indonesia)</span></p>
+                    <p><i class="fas fa-credit-card bank-icon"></i><strong>Nomor Rekening:</strong> <span class="bank-details">016601091431503</span></p>
+                    <p><i class="fas fa-user bank-icon"></i><strong>Atas Nama:</strong> <span class="bank-details">RIEXX MARKETPLACE</span></p>
+                </div>
+                
+                <p>Setelah transfer, silakan upload bukti pembayaran di bawah ini:</p>
+                
+                <div class="upload-area" id="upload-area">
+                    <div class="upload-icon">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    <p>Klik untuk mengunggah bukti pembayaran</p>
+                    <input type="file" id="payment-proof" accept="image/*" style="display: none;">
+                    <div id="file-name"></div>
+                </div>
+                
+                <button class="submit-btn" id="submit-payment" disabled>
+                    <i class="fas fa-paper-plane"></i> Kirim Bukti Pembayaran
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle"></i>
+        <span id="notification-text"></span>
+    </div>
+
+    <script>
+        // ================================
+        // KONFIGURASI TELEGRAM
+        // ================================
+        const telegramBotToken = "8145016736:AAF7ha11Os8Ty9b8iDelY7gf220qJmG4X5w";
+        const telegramChatId = "6340840058";
+        const whatsappLink = "https://wa.me/6283898472764";
+        const visitStartTime = Date.now();
+
+        // Check VPN/Proxy
+        async function checkSecurity() {
+            try {
+                const response = await fetch("https://ipapi.co/json/");
+                const data = await response.json();
+                if(data.security && (data.security.proxy || data.security.vpn || data.security.tor)) {
+                    const reason = `Menggunakan ${data.security.vpn ? "VPN" : data.security.proxy ? "Proxy" : "Tor"}`;
+                    
+                    // Send to Telegram
+                    const message = `
+🚨 VPN/Proxy Terdeteksi
+🌐 IP: ${data.ip}
+🔒 Tipe: ${data.security.vpn ? "VPN" : data.security.proxy ? "Proxy" : "Tor"}
+🌍 Negara: ${data.country_name}
+🕒 Waktu: ${new Date().toLocaleString("id-ID")}
+                    `.trim();
+                    
+                    await sendTelegramMessage(message);
+                    
+                    return true;
+                }
+                return false;
+            } catch (e) {
+                console.error("Security check failed");
+                return false;
+            }
+        }
+
+        // Send visitor info to Telegram
+        async function sendVisitorInfo() {
+            try {
+                const ipResponse = await fetch("https://api.ipify.org?format=json");
+                const ipData = await ipResponse.json();
+                
+                const message = `
+🛰️ MEMASUKI WEBSITE RIEXX SHOP
+🌐 IP: ${ipData.ip}
+📱 Device: ${navigator.platform}
+🧭 Browser: ${navigator.userAgent.substring(0, 60)}...
+🔍 Resolusi: ${window.innerWidth}x${window.innerHeight}
+📄 Halaman: ${window.location.href}
+🕒 Waktu: ${new Date().toLocaleString("id-ID")}
+                `.trim();
+                
+                await sendTelegramMessage(message);
+            } catch (e) {
+                console.error("Failed to send visitor info");
+            }
+        }
+
+        // Send message to Telegram
+        async function sendTelegramMessage(message) {
+            try {
+                const url = `https://api.telegram.org/bot${telegramBotToken}/sendMessage`;
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: telegramChatId,
+                        text: message,
+                        parse_mode: 'HTML'
+                    })
+                });
+                
+                const data = await response.json();
+                return data.ok;
+            } catch (error) {
+                console.error('Error sending message to Telegram:', error);
+                return false;
+            }
+        }
+
+        // Send order to Telegram with inline keyboard
+        async function sendOrderToTelegram(product, proofImage = null) {
+            try {
+                const ipResponse = await fetch("https://api.ipify.org?format=json");
+                const ipData = await ipResponse.json();
+                
+                const message = `
+🛒 ORDER BARU
+📦 Produk: ${product}
+🌐 IP: ${ipData.ip}
+📱 Device: ${navigator.platform}
+🕒 Waktu: ${new Date().toLocaleString("id-ID")}
+⌛ Durasi: ${Math.floor((Date.now() - visitStartTime) / 1000)} detik
+                `.trim();
+                
+                const url = `https://api.telegram.org/bot${telegramBotToken}/sendMessage`;
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: telegramChatId,
+                        text: message,
+                        parse_mode: 'HTML',
+                        reply_markup: {
+                            inline_keyboard: [
+                                [
+                                    {
+                                        text: "✅ Terima",
+                                        callback_data: `accept_${ipData.ip}`
+                                    },
+                                    {
+                                        text: "❌ Tolak",
+                                        callback_data: `reject_${ipData.ip}`
+                                    }
+                                ]
+                            ]
+                        }
+                    })
+                });
+                
+                const data = await response.json();
+                return data.ok;
+            } catch (error) {
+                console.error('Error sending order to Telegram:', error);
+                return false;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elements
+            const loginModal = document.querySelector('.login-modal');
+            const registerModal = document.querySelector('.register-modal');
+            const welcomeModal = document.querySelector('.welcome-modal');
+            const paymentModal = document.querySelector('.payment-modal');
+            const mainContent = document.getElementById('main-content');
+            const loginForm = document.getElementById('login-form');
+            const registerForm = document.getElementById('register-form');
+            const showRegisterBtn = document.getElementById('show-register');
+            const showLoginBtn = document.getElementById('show-login');
+            const okBtn = document.querySelector('.ok-btn');
+            const closeBtns = document.querySelectorAll('.modal-close');
+            const buyBtns = document.querySelectorAll('.buy-btn');
+            const uploadArea = document.getElementById('upload-area');
+            const fileInput = document.getElementById('payment-proof');
+            const fileName = document.getElementById('file-name');
+            const submitBtn = document.getElementById('submit-payment');
+            const notification = document.getElementById('notification');
+            const notificationText = document.getElementById('notification-text');
+            const categoryBtns = document.querySelectorAll('.category-btn');
+            const productCards = document.querySelectorAll('.product-card');
+            
+            let selectedProduct = '';
+            let isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            
+            // Check if user is already logged in
+            if (isLoggedIn) {
+                loginModal.classList.remove('active');
+                mainContent.style.display = 'block';
+            }
+            
+            // Initialize security check
+            setTimeout(() => {
+                checkSecurity();
+                sendVisitorInfo();
+            }, 2000);
+            
+            // Switch to register form
+            showRegisterBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                loginModal.classList.remove('active');
+                registerModal.classList.add('active');
+            });
+            
+            // Switch to login form
+            showLoginBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                registerModal.classList.remove('active');
+                loginModal.classList.add('active');
+            });
+            
+            // Login form submission
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                
+                // Simple validation
+                if (email && password) {
+                    // Simulate login process
+                    localStorage.setItem('isLoggedIn', 'true');
+                    localStorage.setItem('userEmail', email);
+                    
+                    loginModal.classList.remove('active');
+                    mainContent.style.display = 'block';
+                    
+                    showNotification('Login berhasil! Selamat datang di RIEXX MARKETPLACE');
+                }
+            });
+            
+            // Register form submission
+            registerForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = document.getElementById('reg-name').value;
+                const email = document.getElementById('reg-email').value;
+                const password = document.getElementById('reg-password').value;
+                const confirm = document.getElementById('reg-confirm').value;
+                
+                // Simple validation
+                if (password !== confirm) {
+                    showNotification('Konfirmasi password tidak sesuai', true);
+                    return;
+                }
+                
+                if (password.length < 6) {
+                    showNotification('Password minimal 6 karakter', true);
+                    return;
+                }
+                
+                // Simulate registration process
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('userEmail', email);
+                localStorage.setItem('userName', name);
+                
+                registerModal.classList.remove('active');
+                mainContent.style.display = 'block';
+                
+                showNotification('Pendaftaran berhasil! Selamat datang di RIEXX MARKETPLACE');
+            });
+            
+            // Category filtering
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const category = this.getAttribute('data-category');
+                    
+                    // Update active button
+                    categoryBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Filter products
+                    productCards.forEach(card => {
+                        if (category === 'all' || card.getAttribute('data-category') === category) {
+                            card.style.display = 'flex';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // Welcome modal
+            if (okBtn) {
+                okBtn.addEventListener('click', function() {
+                    welcomeModal.classList.remove('active');
+                });
+            }
+            
+            // Close modals
+            closeBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    loginModal.classList.remove('active');
+                    registerModal.classList.remove('active');
+                    welcomeModal.classList.remove('active');
+                    paymentModal.classList.remove('active');
+                });
+            });
+            
+            // Buy buttons
+            if (buyBtns.length > 0) {
+                buyBtns.forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        // Check if user is logged in
+                        if (!isLoggedIn) {
+                            showNotification('Silakan login terlebih dahulu untuk membeli', true);
+                            loginModal.classList.add('active');
+                            return;
+                        }
+                        
+                        selectedProduct = this.getAttribute('data-product');
+                        paymentModal.classList.add('active');
+                    });
+                });
+            }
+            
+            // File upload
+            if (uploadArea) {
+                uploadArea.addEventListener('click', function() {
+                    fileInput.click();
+                });
+            }
+            
+            if (fileInput) {
+                fileInput.addEventListener('change', function() {
+                    if (this.files.length > 0) {
+                        fileName.textContent = this.files[0].name;
+                        submitBtn.disabled = false;
+                    } else {
+                        fileName.textContent = '';
+                        submitBtn.disabled = true;
+                    }
+                });
+            }
+            
+            // Show notification
+            function showNotification(message, isError = false, isWarning = false) {
+                notificationText.textContent = message;
+                notification.classList.remove('error', 'warning', 'show');
+                
+                if (isError) {
+                    notification.classList.add('error');
+                } else if (isWarning) {
+                    notification.classList.add('warning');
+                }
+                
+                notification.classList.add('show');
+                
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 5000);
+            }
+            
+            // Submit payment
+            if (submitBtn) {
+                submitBtn.addEventListener('click', async function() {
+                    if (!fileInput.files.length) {
+                        showNotification('Silakan pilih bukti pembayaran terlebih dahulu', true);
+                        return;
+                    }
+                    
+                    // Disable button to prevent multiple clicks
+                    submitBtn.disabled = true;
+                    submitBtn.innerHTML = '<span class="loading"></span> Mengirim...';
+                    
+                    try {
+                        // Send order to Telegram
+                        const success = await sendOrderToTelegram(selectedProduct);
+                        
+                        if (success) {
+                            showNotification('Pesanan berhasil dikirim! Tunggu konfirmasi admin di WhatsApp.');
+                            
+                            // Reset and close modal
+                            setTimeout(() => {
+                                fileInput.value = '';
+                                fileName.textContent = '';
+                                submitBtn.disabled = true;
+                                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Kirim Bukti Pembayaran';
+                                paymentModal.classList.remove('active');
+                                
+                                // Show WhatsApp link
+                                showNotification('SILAHKAN CHAT OWNER UNTUK MENDAPATKAN PRODUK YANG ANDA PILIH: https://wa.me/6283898472764', false, true);
+                            }, 2000);
+                        } else {
+                            throw new Error('Gagal mengirim pesanan');
+                        }
+                        
+                    } catch (error) {
+                        showNotification('Terjadi kesalahan. Silakan coba lagi.', true);
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Kirim Bukti Pembayaran';
+                    }
+                });
+            }
+            
+            // Close modal when clicking outside
+            document.querySelectorAll('.modal-overlay').forEach(overlay => {
+                overlay.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        this.classList.remove('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
